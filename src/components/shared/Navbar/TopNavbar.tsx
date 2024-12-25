@@ -17,14 +17,8 @@ const TopNavbar = () => {
     }`:
       pageTitle = "Book Details";
       break;
-    case "/users":
-      pageTitle = "Users";
-      break;
-    case "/products":
-      pageTitle = "Products";
-      break;
-    case "/purchase-history":
-      pageTitle = "Orders";
+    case "/add-book":
+      pageTitle = "Add Book";
       break;
     default:
       pageTitle = "Dashboard";

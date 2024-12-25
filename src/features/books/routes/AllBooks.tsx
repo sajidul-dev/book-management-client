@@ -6,7 +6,6 @@ export const AllBooks = () => {
   const booksQuery = useBooks();
   if (booksQuery.isLoading) return <Spinner />;
   if (booksQuery.isError) return <div>Error: {booksQuery.error.message}</div>;
-  console.log(booksQuery?.data?.data);
   return (
     <div className="grid grid-cols-10 gap-6">
       {booksQuery &&

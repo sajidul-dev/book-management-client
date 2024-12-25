@@ -1,5 +1,5 @@
 export type Book = {
-  _id: string;
+  _id?: string;
   ISBN: string;
   availability: string;
   brand: string;
@@ -23,3 +23,17 @@ export type BookResponse = {
     total: number;
   };
 };
+
+export interface FormData {
+  ISBN: string;
+  availability: string;
+  brand: string;
+  delivery: string[];
+  description: string;
+  price: number;
+  image_url: string;
+  rating: string;
+  reviews_count: number;
+  title: string;
+  categories: string;
+}

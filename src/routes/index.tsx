@@ -10,6 +10,7 @@ const { BookDetails } = lazyImport(
   () => import("../features/books"),
   "BookDetails"
 );
+const { AddBook } = lazyImport(() => import("../features/books"), "AddBook");
 
 export const AppRoutes = () => {
   const routes = useMemo(
@@ -31,6 +32,14 @@ export const AppRoutes = () => {
             element: (
               <Suspense fallback={<Spinner />}>
                 <BookDetails />
+              </Suspense>
+            ),
+          },
+          {
+            path: "add-book",
+            element: (
+              <Suspense fallback={<Spinner />}>
+                <AddBook />
               </Suspense>
             ),
           },

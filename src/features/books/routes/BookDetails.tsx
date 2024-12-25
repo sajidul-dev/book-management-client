@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useBookDetails } from "../api/getBookDeatils";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { useDeleteBookMutation } from "../api/deleteBook";
@@ -6,6 +6,7 @@ import { Spinner } from "@/components/Elements/Spinner/Spinner";
 
 export const BookDetails = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const deleteBookMutation = useDeleteBookMutation();
 
   const bookDetailsQuery = useBookDetails(
@@ -22,6 +23,11 @@ export const BookDetails = () => {
     return <div>No data</div>;
   }
   const book = bookDetailsQuery.data;
+
+  const handleDeleteBook = (id: string) => {
+    deleteBookMutation.mutate(id);
+    navigate("/books");
+  };
 
   return (
     <div className="flex justify-start gap-8">
@@ -44,7 +50,13 @@ export const BookDetails = () => {
             Edit
           </button>
           <button
-            onClick={() => deleteBookMutation.mutate(book._id)}
+            onClick={() =>
+              handleDeleteBook(
+                location.pathname.split("/")[
+                  location.pathname.split("/").length - 1
+                ]
+              )
+            }
             className="px-2 py-1 bg-red-400 rounded-lg text-white flex gap-2 justify-start items-center"
             type="button"
           >
