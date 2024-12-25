@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 .stars {
-  font-size: 30px; /* Adjust the size of the stars */
+  font-size: 20px; /* Adjust the size of the stars */
   color: gray; /* Default color for empty stars */
   position: relative;
   display: inline-block;
@@ -18,4 +18,29 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; /* Make text transparent */
   text-fill-color: transparent; /* For non-webkit browsers */
+}
+
+.pagination {
+  display: flex;
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background: #007bff;
+  color: #fff;
+  font-weight: bold;
+}
+
+.pagination button:disabled {
+  background: #f1f1f1;
+  color: #ccc;
+  cursor: not-allowed;
 }

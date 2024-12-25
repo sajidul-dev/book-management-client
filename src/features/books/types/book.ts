@@ -25,6 +25,7 @@ export type BookResponse = {
 };
 
 export interface FormData {
+  id?: string | undefined;
   ISBN: string;
   availability: string;
   brand: string;
@@ -37,3 +38,9 @@ export interface FormData {
   title: string;
   categories: string;
 }
+
+export type PaginationProps = {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (newPage: number) => void;
+};

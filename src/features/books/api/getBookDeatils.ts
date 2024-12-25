@@ -10,8 +10,8 @@ export const getBookDeatils = async (id: string): Promise<Book> => {
 
 export const useBookDetails = (id: string) => {
   return useQuery({
-    queryKey: ["books", id],
+    queryKey: ["book", id],
     queryFn: () => getBookDeatils(id),
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: true,
   });
 };

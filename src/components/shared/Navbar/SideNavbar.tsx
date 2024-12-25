@@ -2,8 +2,7 @@ import { memo, useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../../../assets/icons/logo.svg";
 import { BiSolidReport } from "react-icons/bi";
-import { FaBook, FaShoppingCart } from "react-icons/fa";
-import { AiFillProduct } from "react-icons/ai";
+import { FaBook } from "react-icons/fa";
 
 export const SideNavbar = memo(() => {
   const [isOpen, setIsOpen] = useState(false);
@@ -81,36 +80,6 @@ export const SideNavbar = memo(() => {
               >
                 <FaBook style={{ fontSize: "18px" }} />
                 Add Book
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/products"
-                className={({ isActive, isPending }) =>
-                  isPending
-                    ? "pending"
-                    : isActive
-                    ? "px-4 py-2 bg-[#2A2C7B] rounded-lg flex justify-start gap-3 items-center"
-                    : "px-4 py-2 flex justify-start gap-3 items-center"
-                }
-              >
-                <AiFillProduct style={{ fontSize: "18px" }} />
-                Products
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/purchase-history"
-                className={({ isActive, isPending }) =>
-                  isPending
-                    ? "pending"
-                    : isActive
-                    ? "px-4 py-2 bg-[#2A2C7B] rounded-lg flex justify-start gap-3 items-center"
-                    : "px-4 py-2 flex justify-start gap-3 items-center"
-                }
-              >
-                <FaShoppingCart style={{ fontSize: "18px" }} />
-                Orders
               </NavLink>
             </li>
           </ul>

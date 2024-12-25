@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import TopNavbar from "../shared/Navbar/TopNavbar";
 import { SideNavbar } from "../shared/Navbar/SideNavbar";
