@@ -20,7 +20,7 @@ const TopNavbar = () => {
   }
 
   return (
-    <div className="flex justify-around items-center gap-8 mt-[42px] mb-6 ">
+    <div className="flex justify-around items-center gap-8 my-4 ">
       <div className="flex-1 flex justify-between items-center w-full">
         <div>
           <h1 className="font-extrabold text-[#04081D] text-[30px]">

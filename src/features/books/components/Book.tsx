@@ -17,7 +17,9 @@ const BookComponent = ({ book }: Props) => {
             alt={book.title}
           />
         </div>
-        <p className="text-center">{book.title.slice(0, 50)}...</p>
+        <p className="text-center font-semibold">
+          {book.title.slice(0, 50)}...
+        </p>
         <div className="flex flex-col justify-center items-center">
           <RatingStars rating={Number(book.rating.split(" ")[0])} />
           <p className="text-center">{book.rating}</p>

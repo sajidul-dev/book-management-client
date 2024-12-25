@@ -35,7 +35,7 @@ export const BookDetails = () => {
   return (
     <div
       className={`${
-        open && "h-[calc(100vh-148px)]"
+        open && "h-[calc(100vh-110px)]"
       } relative flex justify-start gap-8 overflow-hidden`}
     >
       <div className="w-[400px] flex justify-center h-fit">

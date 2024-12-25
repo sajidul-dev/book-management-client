@@ -21,7 +21,7 @@ export const AllBooks = () => {
     return <div>Error: {categoriesQuery.error.message}</div>;
 
   return (
-    <div>
+    <div className="h-[calc(100vh-110px)]">
       <div className="w-full flex justify-center my-6">
         <input
           type="text"

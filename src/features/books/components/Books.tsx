@@ -29,7 +29,7 @@ const Books = ({
   if (booksQuery.isError) return <div>Error: {booksQuery.error.message}</div>;
 
   return (
-    <div className="grid grid-cols-10 gap-6">
+    <div className="grid grid-cols-10 gap-6 flex-grow">
       {booksQuery &&
         booksQuery.data?.data.map((book) => {
           return (
