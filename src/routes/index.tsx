@@ -1,7 +1,15 @@
-import { useMemo } from "react";
+import { Suspense, useMemo } from "react";
 import { useRoutes } from "react-router-dom";
 
 import MainLayout from "@/components/Layout/MainLayout";
+import { lazyImport } from "@/utils/lazyImport";
+import { Spinner } from "@/components/Elements/Spinner/Spinner";
+
+const { AllBooks } = lazyImport(() => import("../features/books"), "AllBooks");
+const { BookDetails } = lazyImport(
+  () => import("../features/books"),
+  "BookDetails"
+);
 
 export const AppRoutes = () => {
   const routes = useMemo(
@@ -9,7 +17,28 @@ export const AppRoutes = () => {
       {
         path: "/",
         element: <MainLayout />,
-        children: [],
+        children: [
+          {
+            path: "books",
+            element: (
+              <Suspense fallback={<Spinner />}>
+                <AllBooks />
+              </Suspense>
+            ),
+          },
+          {
+            path: "books/:id",
+            element: (
+              <Suspense fallback={<Spinner />}>
+                <BookDetails />
+              </Suspense>
+            ),
+          },
+        ],
+      },
+      {
+        path: "*",
+        element: <div>Not Found</div>,
       },
     ],
     []
