@@ -1,8 +1,7 @@
 import { memo, useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../../../assets/icons/logo.svg";
-import { BiSolidReport } from "react-icons/bi";
-import { FaBook } from "react-icons/fa";
+import { FaBook, FaPlusCircle } from "react-icons/fa";
 
 export const SideNavbar = memo(() => {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,7 +62,7 @@ export const SideNavbar = memo(() => {
                     : "px-4 py-2 flex justify-start gap-3 items-center"
                 }
               >
-                <BiSolidReport style={{ fontSize: "18px" }} />
+                <FaBook style={{ fontSize: "18px" }} />
                 <p>Books</p>
               </NavLink>
             </li>
@@ -78,7 +77,7 @@ export const SideNavbar = memo(() => {
                     : " px-4 py-2 flex justify-start gap-3 items-center"
                 }
               >
-                <FaBook style={{ fontSize: "18px" }} />
+                <FaPlusCircle style={{ fontSize: "18px" }} />
                 Add Book
               </NavLink>
             </li>
