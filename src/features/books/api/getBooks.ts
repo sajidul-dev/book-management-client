@@ -9,9 +9,17 @@ export const getBooks = async (
   searchTerm: string,
   filter: string | null
 ): Promise<BookResponse> => {
-  const response = await axios.get(`${API_URL}/api/v1/books`, {
-    params: { page, page_size: pageSize, search: searchTerm, category: filter },
-  });
+  const response = await axios.get(
+    `${API_URL}/api/v1/books?sort_by=createdAt&sort_order=-1`,
+    {
+      params: {
+        page,
+        page_size: pageSize,
+        search: searchTerm,
+        category: filter,
+      },
+    }
+  );
   return response.data;
 };
 

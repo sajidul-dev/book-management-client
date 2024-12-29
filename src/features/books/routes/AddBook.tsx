@@ -12,9 +12,15 @@ export const AddBook = () => {
   } = useForm<FormData>();
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    addBookMutation.mutate(data);
-    console.log(addBookMutation.isSuccess);
-    if (!addBookMutation.isSuccess) {
+    const transformedData = {
+      ...data,
+      author_name: data.author_name.split(",").map((item) => item.trim()),
+      category: data.category.split(",").map((item) => item.trim()),
+      isbn: data.isbn.split(",").map((item) => item.trim()),
+    };
+    addBookMutation.mutate(transformedData);
+    console.log(transformedData);
+    if (addBookMutation.status === "success") {
       reset();
     }
   };
@@ -27,115 +33,23 @@ export const AddBook = () => {
             <div>
               <label className="block text-sm font-medium">ISBN</label>
               <input
-                {...register("ISBN", { required: "ISBN is required" })}
+                {...register("isbn", { required: "ISBN is required" })}
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
               />
-              {errors.ISBN && (
-                <p className="text-red-500 text-sm">{errors.ISBN.message}</p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium">Availability</label>
-              <input
-                {...register("availability", {
-                  required: "Availability is required",
-                })}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-              />
-              {errors.availability && (
-                <p className="text-red-500 text-sm">
-                  {errors.availability.message}
-                </p>
+              {errors.isbn && (
+                <p className="text-red-500 text-sm">{errors.isbn.message}</p>
               )}
             </div>
 
             <div>
               <label className="block text-sm font-medium">Brand</label>
               <input
-                {...register("brand", { required: "Brand is required" })}
+                {...register("author_name", { required: "Brand is required" })}
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
               />
-              {errors.brand && (
-                <p className="text-red-500 text-sm">{errors.brand.message}</p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium">
-                Delivery Options (comma-separated)
-              </label>
-              <textarea
-                {...register("delivery", {
-                  required: "Delivery options are required",
-                  setValueAs: (value) => value.split(","),
-                })}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-              />
-              {errors.delivery && (
+              {errors.author_name && (
                 <p className="text-red-500 text-sm">
-                  {errors.delivery.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium">Description</label>
-              <textarea
-                {...register("description", {
-                  required: "Description is required",
-                })}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-              />
-              {errors.description && (
-                <p className="text-red-500 text-sm">
-                  {errors.description.message}
-                </p>
-              )}
-            </div>
-          </div>
-
-          <div className="w-full">
-            <div>
-              <label className="block text-sm font-medium">Image URL</label>
-              <input
-                type="text"
-                {...register("image_url", {
-                  required: "Image URL is required",
-                })}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-              />
-              {errors.image_url && (
-                <p className="text-red-500 text-sm">
-                  {errors.image_url.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium">Rating</label>
-              <input
-                {...register("rating", { required: "Rating is required" })}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-              />
-              {errors.rating && (
-                <p className="text-red-500 text-sm">{errors.rating.message}</p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium">Reviews Count</label>
-              <input
-                type="number"
-                step="0.01"
-                {...register("reviews_count", {
-                  required: "Reviews count is required",
-                })}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-              />
-              {errors.reviews_count && (
-                <p className="text-red-500 text-sm">
-                  {errors.reviews_count.message}
+                  {errors.author_name.message}
                 </p>
               )}
             </div>
@@ -154,27 +68,15 @@ export const AddBook = () => {
             <div>
               <label className="block text-sm font-medium">Categories</label>
               <input
-                {...register("categories", {
+                {...register("category", {
                   required: "Categories are required",
                 })}
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
               />
-              {errors.categories && (
+              {errors.category && (
                 <p className="text-red-500 text-sm">
-                  {errors.categories.message}
+                  {errors.category.message}
                 </p>
-              )}
-            </div>
-            <div>
-              <label className="block text-sm font-medium">Price</label>
-              <input
-                type="number"
-                step="0.01"
-                {...register("price", { required: "Price is required" })}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-              />
-              {errors.price && (
-                <p className="text-red-500 text-sm">{errors.price.message}</p>
               )}
             </div>
           </div>
@@ -182,6 +84,7 @@ export const AddBook = () => {
 
         <button
           type="submit"
+          disabled={addBookMutation.isPending}
           className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
         >
           Add Book

@@ -20,6 +20,8 @@ export const useUpdateBookMutation = () => {
   return useMutation({
     mutationFn: (params: { id: string; data: any }) => updateBook(params),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["books"] });
+      queryClient.invalidateQueries({ queryKey: ["book"] });
       queryClient.fetchQuery({ queryKey: ["books"] });
       queryClient.fetchQuery({ queryKey: ["book"] });
       toast.success("Book updated successfully");

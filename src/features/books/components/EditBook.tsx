@@ -17,8 +17,16 @@ const EditBook = ({ book, refetch }: Props) => {
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     if (book._id) {
-      updatebookMutation.mutate({ id: book._id, data });
-      if (!updatebookMutation.isSuccess) {
+      console.log("data", data);
+      const transformedData = {
+        ...data,
+        author_name: data.author_name.split(",").map((item) => item.trim()),
+        category: data.category.split(",").map((item) => item.trim()),
+        isbn: data.isbn.split(",").map((item) => item.trim()),
+      };
+      console.log(transformedData);
+      updatebookMutation.mutate({ id: book._id, data: transformedData });
+      if (updatebookMutation.status === "success") {
         refetch();
       }
     }
@@ -30,120 +38,24 @@ const EditBook = ({ book, refetch }: Props) => {
         <div>
           <label className="block text-sm font-medium">ISBN</label>
           <input
-            {...register("ISBN")}
-            defaultValue={book.ISBN}
+            {...register("isbn")}
+            defaultValue={book.isbn}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
           />
-          {errors.ISBN && (
-            <p className="text-red-500 text-sm">{errors.ISBN.message}</p>
+          {errors.isbn && (
+            <p className="text-red-500 text-sm">{errors.isbn.message}</p>
           )}
         </div>
 
         <div>
-          <label className="block text-sm font-medium">Availability</label>
+          <label className="block text-sm font-medium">Author Name</label>
           <input
-            {...register("availability")}
-            defaultValue={book.availability}
+            {...register("author_name")}
+            defaultValue={book.author_name}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
           />
-          {errors.availability && (
-            <p className="text-red-500 text-sm">
-              {errors.availability.message}
-            </p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium">Brand</label>
-          <input
-            {...register("brand")}
-            defaultValue={book.brand}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-          />
-          {errors.brand && (
-            <p className="text-red-500 text-sm">{errors.brand.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium">
-            Delivery Options (comma-separated)
-          </label>
-          <textarea
-            {...register("delivery", {
-              setValueAs: (value) => value.split(","),
-            })}
-            defaultValue={book.delivery}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-          />
-          {errors.delivery && (
-            <p className="text-red-500 text-sm">{errors.delivery.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium">Description</label>
-          <textarea
-            {...register("description")}
-            defaultValue={book.description}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-          />
-          {errors.description && (
-            <p className="text-red-500 text-sm">{errors.description.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium">Price</label>
-          <input
-            type="number"
-            step="0.01"
-            {...register("price")}
-            defaultValue={book.price}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-          />
-          {errors.price && (
-            <p className="text-red-500 text-sm">{errors.price.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium">Image URL</label>
-          <input
-            type="text"
-            {...register("image_url")}
-            defaultValue={book.image_url}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-          />
-          {errors.image_url && (
-            <p className="text-red-500 text-sm">{errors.image_url.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium">Rating</label>
-          <input
-            {...register("rating")}
-            defaultValue={book.rating}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-          />
-          {errors.rating && (
-            <p className="text-red-500 text-sm">{errors.rating.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium">Reviews Count</label>
-          <input
-            type="number"
-            {...register("reviews_count")}
-            defaultValue={book.reviews_count}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-          />
-          {errors.reviews_count && (
-            <p className="text-red-500 text-sm">
-              {errors.reviews_count.message}
-            </p>
+          {errors.author_name && (
+            <p className="text-red-500 text-sm">{errors.author_name.message}</p>
           )}
         </div>
 
@@ -158,16 +70,15 @@ const EditBook = ({ book, refetch }: Props) => {
             <p className="text-red-500 text-sm">{errors.title.message}</p>
           )}
         </div>
-
         <div>
-          <label className="block text-sm font-medium">Categories</label>
+          <label className="block text-sm font-medium">Title</label>
           <input
-            {...register("categories")}
-            defaultValue={book.categories}
+            {...register("category")}
+            defaultValue={book.category}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
           />
-          {errors.categories && (
-            <p className="text-red-500 text-sm">{errors.categories.message}</p>
+          {errors.category && (
+            <p className="text-red-500 text-sm">{errors.category.message}</p>
           )}
         </div>
 

@@ -5,7 +5,7 @@ import { sizes, SpinnerProps, variants } from "../../../types/spinner";
 export const Spinner = memo(
   ({ size = "md", variant = "primary", className = "" }: SpinnerProps) => {
     return (
-      <div className="container mx-auto w-full h-screen flex justify-center items-center">
+      <div className="container mx-auto w-full flex justify-center items-center">
         <svg
           className={clsx(
             "animate-spin",

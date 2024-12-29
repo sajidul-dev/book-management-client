@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { useBooks } from "../api/getBooks";
-import BookComponent from "./Book";
 import { Spinner } from "@/components/Elements/Spinner/Spinner";
+import { useColumnName } from "@/hooks/useColumnName";
+import Table from "@/components/Elements/Table/Table";
 interface BooksProps {
   page: number;
   pageSize: number;
@@ -25,19 +28,27 @@ const Books = ({
       setTotalPages(Math.ceil(meta.total / meta.limit));
     }
   }, [booksQuery.data]);
-  if (booksQuery.isLoading) return <Spinner />;
+  if (booksQuery.isLoading)
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
+  const columns = useColumnName(booksQuery.data?.data[0]);
   if (booksQuery.isError) return <div>Error: {booksQuery.error.message}</div>;
-
   return (
     <div className="grid grid-cols-10 gap-6 flex-grow">
-      {booksQuery &&
-        booksQuery.data?.data.map((book) => {
-          return (
-            <div key={book._id} className="col-span-2">
-              <BookComponent book={book} />
-            </div>
-          );
-        })}
+      <div className="col-span-10">
+        <Table
+          columns={columns as any}
+          data={booksQuery.data ? booksQuery.data?.data : []}
+        />
+      </div>
+      {booksQuery && booksQuery.data?.data.length === 0 && (
+        <p className="text-center text-nowrap w-full col-span-10">
+          No books found
+        </p>
+      )}
     </div>
   );
 };

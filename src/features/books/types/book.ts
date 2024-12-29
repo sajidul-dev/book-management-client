@@ -1,18 +1,11 @@
 export type Book = {
   _id?: string;
-  ISBN: string;
-  availability: string;
-  brand: string;
-  delivery: string[];
-  description: string;
-  price: number;
-  image_url: string;
-  rating: string;
-  reviews_count: number;
+  isbn: string[];
+  author_name: string[];
+  category: string[];
   title: string;
-  categories: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 export type BookResponse = {
@@ -25,18 +18,11 @@ export type BookResponse = {
 };
 
 export interface FormData {
-  id?: string | undefined;
-  ISBN: string;
-  availability: string;
-  brand: string;
-  delivery: string[];
-  description: string;
-  price: number;
-  image_url: string;
-  rating: string;
-  reviews_count: number;
+  _id?: string | undefined;
+  isbn: string;
+  author_name: string;
+  category: string;
   title: string;
-  categories: string;
 }
 
 export type PaginationProps = {
