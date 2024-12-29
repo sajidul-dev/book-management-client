@@ -1,3 +1,4 @@
+import { Book } from "@/features/books/types/book";
 import { useState } from "react";
 import { ReactNode } from "react";
 import { FaAngleRight } from "react-icons/fa";
@@ -8,7 +9,7 @@ interface Column<T> {
   label: string;
 }
 
-interface TableProps<T extends { _id: string }> {
+interface TableProps<T extends Book> {
   data: T[];
   columns: Column<T>[] | undefined;
   tFooter?: ReactNode;
@@ -43,11 +44,7 @@ const ExpandableCell = ({
   );
 };
 
-const Table = <T extends { _id: string }>({
-  data,
-  columns,
-  tFooter,
-}: TableProps<T>) => {
+const Table = <T extends Book>({ data, columns, tFooter }: TableProps<T>) => {
   const navigate = useNavigate();
 
   return (

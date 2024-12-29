@@ -36,13 +36,16 @@ const Books = ({
     );
   const columns = useColumnName(booksQuery.data?.data[0]);
   if (booksQuery.isError) return <div>Error: {booksQuery.error.message}</div>;
+
   return (
     <div className="grid grid-cols-10 gap-6 flex-grow">
       <div className="col-span-10">
-        <Table
-          columns={columns as any}
-          data={booksQuery.data ? booksQuery.data?.data : []}
-        />
+        {booksQuery.data?.data && (
+          <Table
+            columns={columns as any}
+            data={booksQuery.data && booksQuery.data?.data}
+          />
+        )}
       </div>
       {booksQuery && booksQuery.data?.data.length === 0 && (
         <p className="text-center text-nowrap w-full col-span-10">
